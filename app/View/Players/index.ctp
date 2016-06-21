@@ -23,6 +23,7 @@
                 <th>DNI</th>
                 <th>Nombre</th>
                 <th>Apellido</th>
+                <th>Apellido</th>
                 
                 <th>Teléfono</th>
                 <th>Acción</th>
