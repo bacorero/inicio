@@ -7,6 +7,7 @@ class PlayersController extends AppController {
 		'limit' => 5,
 		'order' => array(
 			'Player.apellido' => 'asc'));
+	var $uses = array('Player','Team');
 
 //Vemos los jugadores en forma global
 	public function index(){
@@ -51,6 +52,7 @@ class PlayersController extends AppController {
 	}
 
 
+
 //Accion de crear nuevo jugador
 
 public function nuevo(){
@@ -88,7 +90,8 @@ public function ver($id=null)
 
 		//Pasamos los datos del jugador a la vista
 		$this->set('player',$player);
-		$equipos = $this->Player->Team->getVirtualField('nombre_equipo');
+		$equipos = $this->Team->findById($player['Player']['team_id']);
+		
 
 		$this->set('equipos',$equipos);
 

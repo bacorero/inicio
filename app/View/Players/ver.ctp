@@ -5,7 +5,7 @@
 <p><strong>Apellidos: </strong><?php echo $player['Player']['apellido'];?></p>
 <p><strong>Teléfono: </strong><?php echo $player['Player']['telefono'];?></p>
 <p><strong>Antigüedad: </strong><?php echo $player['Player']['created'];?></p>
-<p><strong>Equipo: </strong><?php echo $equipos;?></p>
+<p><strong>Equipo: </strong><?php echo $equipos['Team']['nombre'];?></p>
 
 
 <spam class="botones">
