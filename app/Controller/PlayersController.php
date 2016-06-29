@@ -7,6 +7,7 @@ class PlayersController extends AppController {
 		'limit' => 5,
 		'order' => array(
 			'Player.apellido' => 'asc'));
+	//Requerimos la tabla de los jugadores y la de los equipos
 	var $uses = array('Player','Team');
 
 //Vemos los jugadores en forma global
@@ -15,6 +16,7 @@ class PlayersController extends AppController {
 	//Configuramos la paginación	
 	$this->paginate['Player']['limit'] = 5; //Muestra 5 registros por página
 	$this->paginate['Player']['order'] = array('Player.apellido' =>'asc');	//Ordenados por apellido
+
 	//Recuperamos los jugadores de la BD y lo pasamos a la vista
 	//$this->set ('players', $this->Player->find('all'));
 	$this->set ('players', $this->paginate());
@@ -42,7 +44,7 @@ class PlayersController extends AppController {
 				$params = array('class' => 'sucess'));
 				return $this->redirect(array('action' =>'index'));
 			}
-			$this->Session->setFlash('El jugador no pudo des modificado');
+			$this->Session->setFlash('El jugador no pudo ser modificado');
 		}
 
 		if(!$this->request->data)
@@ -51,7 +53,45 @@ class PlayersController extends AppController {
 		}
 	}
 
+//Accion de fichar a un jugador
+public function fichar($id = null){
 
+	//$resultados = $this->Team->find('all');
+	$player = $this->Player->findById($id);
+	//Comprobamos que existe jugador a fichar
+	if(!$id)
+		{
+			throw new NotFoundException("ERROR! Jugador no encontrado!!");
+		}
+		
+		if(!player)
+		{
+			throw new NotFoundException("ERROR!! Jugador no encontrado!!");
+		}
+
+		if($this->request->is(array('post','put')))
+		{
+			$this->Player->id = $id;
+			if($this->Player->save($this->request->data))
+			{
+				return $this->redirect(array('action' =>'index'));
+			}
+			$this->Session->setFlash('El jugador no ha podido fichar por el equipo');
+		}
+
+		if(!$this->request->data)
+		{
+			$this->request->data = $player;
+		}
+		//Generamos la lista de equipos
+	$resultados = $this->Team->find('all');	
+		foreach($resultados as $value){
+			$equipos[$value['Team']['id']] = $value['Team']['nombre'];
+			}
+		$this->set('grouplist', $equipos);
+
+
+}
 
 //Accion de crear nuevo jugador
 
@@ -90,9 +130,21 @@ public function ver($id=null)
 
 		//Pasamos los datos del jugador a la vista
 		$this->set('player',$player);
+		//Recogemos el nombre del equipo en funcion de la clave foranea
 		$equipos = $this->Team->findById($player['Player']['team_id']);
-		
 
+		//En caso de no estar jugando para ningun equipo lanzamos mensaje
+		if(!$equipos)
+		{
+			$equipos = "No juega en ningún equipo";
+		}
+		//Si no, lanzamos el equipo en el que juega
+		else
+		{
+			$equipos = $equipos['Team']['nombre'];	
+		}
+
+		//Enviamos el equipo a la vista
 		$this->set('equipos',$equipos);
 
 }
