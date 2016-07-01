@@ -12,6 +12,8 @@ class PlayersController extends AppController {
 
 //Vemos los jugadores en forma global
 	public function index(){
+
+	
 	$this->Player->recursive = 0;
 	//Configuramos la paginación	
 	$this->paginate['Player']['limit'] = 5; //Muestra 5 registros por página
@@ -19,6 +21,7 @@ class PlayersController extends AppController {
 
 	//Recuperamos los jugadores de la BD y lo pasamos a la vista
 	//$this->set ('players', $this->Player->find('all'));
+
 	$this->set ('players', $this->paginate());
 	}
 
@@ -115,6 +118,7 @@ public function nuevo(){
 
 public function ver($id=null)
 {
+	
 	if(!$id)	//Comprobamos la existencia del jugador
 		{
 			throw new NotFoundException("ERROR! Datos erróneos!!");

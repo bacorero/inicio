@@ -41,7 +41,8 @@
                 <td>
                 <?php echo $this->Html->link('Ver',
                   array('controller' => 'players', 'action' => 'ver', $play['Player']['id']),
-                    array('class' => 'btn btn-sm btn-primary')); ?>
+                    array('class' => 'btn btn-sm btn-primary'));
+               ?>
                   </td>
               </tr>
              <?php endforeach; ?>

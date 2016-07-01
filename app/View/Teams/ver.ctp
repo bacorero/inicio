@@ -33,8 +33,12 @@
                 <td><?php echo $var['telefono']; ?></td>
                 <td>
                 <?php echo $this->Html->link('Ver',
-                  array('controller' => 'players', 'action' => 'ver', $var['id']),
-                    array('class' => 'btn btn-sm btn-primary')); ?>
+                  array(
+                        'controller' => 'players', 
+                        'action' => 'ver', 
+                        $var['id']),
+                    array('class' => 'btn btn-sm btn-primary'));
+                 ?>
                   </td>
               </tr>
              	<?php endforeach; ?>

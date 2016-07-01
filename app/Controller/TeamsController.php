@@ -5,8 +5,12 @@ class TeamsController extends AppController {
 
 	//Vemos los equipos en forma global
 	public function index(){
-	//Recuperamos los equipos de la BD
-	$this->set ('teams', $this->Team->find('all'));
+		$this->Team->recursive = 0;
+		//Configuramos la paginación	
+		$this->paginate['Team']['limit'] = 5; //Muestra 5 registros por página
+		$this->paginate['Team']['order'] = array('Team.nombre' =>'asc');	//Ordenados los equipos alfabeticamente
+		//Recuperamos los equipos de la BD
+		$this->set ('teams', $this->paginate());
 	}
 
 //Accion de crear nuevo equipo
@@ -31,6 +35,7 @@ public function nuevo(){
 
 public function ver($id=null)
 {
+
 	if(!$id)	//Comprobamos la existencia del equipo
 		{
 			throw new NotFoundException("ERROR! Datos erróneos!!");

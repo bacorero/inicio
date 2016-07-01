@@ -26,8 +26,10 @@ echo $this->Html->link('Fichar',array('controller' => 'players', 'action' => 'fi
 <?php 
 
 //Enlace para volver a la página anterior
+
 echo $this->Html->link('Volver',array('controller' => 'players', 'action' => 'index'),
-	array('class' => 'btn btn-sm btn-primary')); ?>
+	array('class' => 'btn btn-sm btn-primary')); 
+	?>
 </spam>
 
 <spam class="botones">
