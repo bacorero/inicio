@@ -102,6 +102,7 @@ public function nuevo(){
 
 	if($this->request->is('post'))
 	{
+		$this->Player->create();
 		if($this->Player->save($this->request->data))
 		{
 			//$this->Session->setFlash('El jugador ha sido creado');

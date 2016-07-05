@@ -66,6 +66,9 @@ Cache::config('default', array('engine' => 'File'));
  * CakePlugin::loadAll(); // Loads all plugins at once
  * CakePlugin::load('DebugKit'); // Loads a single plugin named DebugKit
  */
+//CakePlugin::loadAll();
+CakePlugin::load('Upload');
+//Plugin::load('cakephp-upload');
 
 /**
  * To prefer app translation over plugin translation, you can set
@@ -110,3 +113,7 @@ CakeLog::config('error', array(
 	'file' => 'error',
 ));
 
+//Habilitamos el plugin de subir archivos
+//CakePlugin::load('Upload');
+//Plugin::load('Josegonzalez/Upload');
+//CakePlugin::loadAll();

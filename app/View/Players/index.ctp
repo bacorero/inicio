@@ -23,8 +23,7 @@
                 <th>DNI</th>
                 <th>Nombre</th>
                 <th>Apellido</th>
-                <th>Apellido</th>
-                
+                <th>Foto</th>
                 <th>Teléfono</th>
                 <th>Acción</th>
               </tr>
@@ -32,17 +31,18 @@
             <tbody>
 
             <?php foreach($players as $play):?>
-              <tr> 
+              <tr>
                 <td><?php echo $play['Player']['dni']; ?></td>
                 <td><?php echo $play['Player']['nombre']; ?></td>
                 <td><?php echo $play['Player']['apellido']; ?></td>
-                
+
+                <td><?php echo $this->Html->image('../files/player/id_foto/'.$play['Player']['dir'].'/'.'thumb_'.$play['Player']['id_foto']); ?></td>
+
 				        <td><?php echo $play['Player']['telefono']; ?></td>
                 <td>
                 <?php echo $this->Html->link('Ver',
                   array('controller' => 'players', 'action' => 'ver', $play['Player']['id']),
-                    array('class' => 'btn btn-sm btn-primary'));
-               ?>
+                    array('class' => 'btn btn-sm btn-primary'));?>
                   </td>
               </tr>
              <?php endforeach; ?>
