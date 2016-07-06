@@ -12,7 +12,10 @@ public $actsAs = array(
 				'big' => '200x200',
 				'small' => '120x120',
 				'thumb' => '80x80'),
-			'thumbnailMethod' => 'php')));
+			'thumbnailMethod' => 'php'),
+			'deleteOnUpdate' => true,
+			'deletefolderOnDelete' => true
+		));
 
 
 //Relación de pertenencia con la tabla de equipos

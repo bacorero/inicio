@@ -35,7 +35,8 @@
                 <td><?php echo $play['Player']['dni']; ?></td>
                 <td><?php echo $play['Player']['nombre']; ?></td>
                 <td><?php echo $play['Player']['apellido']; ?></td>
-
+                
+<!-- campo de la foto -->
                 <td><?php echo $this->Html->image('../files/player/id_foto/'.$play['Player']['dir'].'/'.'thumb_'.$play['Player']['id_foto']); ?></td>
 
 				        <td><?php echo $play['Player']['telefono']; ?></td>
