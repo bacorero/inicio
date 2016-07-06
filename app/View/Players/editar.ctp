@@ -5,6 +5,7 @@
 <?php echo $this->Form->input('apellido'); ?>
 <?php echo $this->Form->input('dni'); ?>
 <?php echo $this->Form->input('telefono'); ?>
+<?php echo $this->Form->input('id_foto.file.remove'); ?>
 
 <!-- campo para modificar la foto -->
 <?php echo $this->Form->input('id_foto', array('type' => 'file', 'label' => 'Foto'));
