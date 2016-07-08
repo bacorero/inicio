@@ -25,6 +25,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		<?php echo $cakeDescription ?>:
 		<?php echo $this->fetch('title'); ?>
 	</title>
+  <meta name="viewport" content = "width = device-width, user-scalable = no, initial-scale = 1.0, maximum-scale = 1.0, minimum-scale = 1.0">
 	<?php
 		echo $this->Html->meta('icon');
 
@@ -81,11 +82,14 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 
     <div id="content">
   
-    	<?php echo $this->Flash->render(); ?>
+    	<?php //echo $this->Flash->render(); ?>
 
 			<?php echo $this->fetch('content'); ?>
       
     </div>
+    <footer>
+      ADIOS
+    </footer>
 	
 </body>
 </html>

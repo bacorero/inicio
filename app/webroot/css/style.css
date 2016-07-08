@@ -2,12 +2,10 @@
 	float:right;
 }
 #content{
-	margin-top: 70px;
-	margin-left: 50px;
 }
 
 .botones{
-	margin-left: 30px;
+	padding-top: 20px;
 }
 
 .oculto{
@@ -26,4 +24,8 @@
 .tra:hover{
 
 	background: #F00;
+}
+
+.bordes{
+	border-style: solid;
 }
