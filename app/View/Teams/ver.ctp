@@ -1,20 +1,26 @@
 <h2> Equipo  <?php echo $team['Team']['nombre'];?></h2>
 
-<p><strong>Nombre: </strong><?php echo $team['Team']['nombre'];?></p>
-<p><strong>Población: </strong><?php echo $team['Team']['poblacion'];?></p>
+<div class = "container-fluid">
+  <div class = "row">
+    <div class = "col-sm-8">
+      <p><strong>Nombre: </strong><?php echo $team['Team']['nombre'];?></p>
+      <p><strong>Población: </strong><?php echo $team['Team']['poblacion'];?></p>
+    </div>
 
-<br>
-<hr>
-<br>
-<h3>Jugadores</h3>
-<?php if (empty($team['Player'])): ?>
-	<p>El Equipo no tiene jugadores</p>
+    <div class = "col-sm-4"> 
+      <?php echo $this->Html->image('../files/team/id_foto/'.$team['Team']['dir'].'/'.'big_'.$team['Team']['id_foto']); ?>
+    </div>
+  </div>
 
-<?php endif ?>
+  <div class = "row">
+    <div class = "col-sm-12">
 
-	<div class="row">
-        <div class="col-md-6">
-          <table class="table table-striped">
+      <h3>Jugadores</h3>
+      <?php if (empty($team['Player'])): ?>
+          <p>El Equipo no tiene jugadores</p>
+      <?php endif ?>
+
+      <table class="table table-striped">
             <thead>
               <tr>
                 <th>DNI</th>
@@ -41,27 +47,31 @@
                  ?>
                   </td>
               </tr>
-             	<?php endforeach; ?>
+              <?php endforeach; ?>
             </tbody>
           </table>
-        </div>
+    </div>
+  </div>
+
+  <div class = "row">
+
+    <div class = "col-sm-3">
+      <?php //Enlace para modificar los equipos
+      echo $this->Html->link('Modificar',array('controller' => 'teams', 'action' => 'editar', $team['Team']['id']),
+      array('class' => 'btn btn-sm btn-primary'));?>
     </div>
 
-<spam class="botones">
-<?php 
-//Enlace para modificar los equipos
-echo $this->Html->link('Modificar',array('controller' => 'teams', 'action' => 'editar', $team['Team']['id']),
-	array('class' => 'btn btn-sm btn-primary'));?>
-</spam>
+    <div class = "col-sm-3">
+      <?php //Enlace para volver a la página anterior
+      echo $this->Html->link('Volver',array('controller' => 'teams', 'action' => 'index'),
+      array('class' => 'btn btn-sm btn-primary')); ?>
+    </div>
 
-<spam class="botones">
-<?php
-//Enlace para volver a la página anterior
-echo $this->Html->link('Volver',array('controller' => 'teams', 'action' => 'index'),
-	array('class' => 'btn btn-sm btn-primary')); ?>
-</spam>
+    <div class = "col-sm-3">
 
-<spam class="botones">
-<?php
-//Enlace para fichar un nuevo jugador
+    </div>
+
+  </div>
+</div>
+
 

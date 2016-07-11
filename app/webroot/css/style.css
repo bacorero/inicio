@@ -4,6 +4,13 @@
 #content{
 }
 
+.etiquetas{
+	font-size: 0.7em;
+}
+h1{
+	padding-top:20px;
+}
+
 .botones{
 	padding-top: 20px;
 }

@@ -62,6 +62,7 @@ public function ver($id=null)
 		}
 
 		$team = $this->Team->findById($id);
+		$this->set ('team', $team);
 		if(!$team)
 		{
 			throw new NotFoundException("ERROR!! Equipo no encontrado!!");
@@ -72,7 +73,7 @@ public function ver($id=null)
 			$this->Team->id = $id;
 			if($this->Team->save($this->request->data))
 			{
-				$this->Session->setFlash('Equipo correctamente modificado');
+				//$this->Session->setFlash('Equipo correctamente modificado');
 				return $this->redirect(array('action' =>'index'));
 			}
 			$this->Session->setFlash('El equipo no pudo ser modificado');

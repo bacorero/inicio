@@ -87,7 +87,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 			<?php echo $this->fetch('content'); ?>
       
     </div>
-    <footer>
+    <footer >
       ADIOS
     </footer>
 	

@@ -55,22 +55,37 @@ if (!Validation::alphaNumeric('cakephp')):
 endif;
 ?>
 
-<H1>Página principal de Competiciones de Alcoy</H1>
+<h1>Página principal de Competiciones de Alcoy</h1>
+
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
   <!-- Indicators -->
   <ol class="carousel-indicators">
     <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-    
+    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
   </ol>
 
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
     <div class="item active">
-      <img src="files/player/id_foto/14/big_linux.jpg" alt="...">
+      <img src="files/home/campo3.jpg" alt="...">
       <div class="carousel-caption">
-       ...
+        ...
       </div>
     </div>
+    <div class="item">
+      <img src="files/home/campo1.jpg" alt="...">
+      <div class="carousel-caption">
+        ...
+      </div>
+    </div>
+        <div class="item">
+      <img src="files/home/campo2.jpg" alt="...">
+      <div class="carousel-caption">
+        ...
+      </div>
+    </div>
+    ...
   </div>
 
   <!-- Controls -->
@@ -83,6 +98,8 @@ endif;
     <span class="sr-only">Next</span>
   </a>
 </div>
+
+
 
 
 
