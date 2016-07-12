@@ -50,9 +50,10 @@
             </tbody>
           </table>
 
-          <?php
-            echo $this->Paginator->counter(array(
-            'format' => __('Página {:page} de {:pages}, mostrando {:current} registros de {:count}, empezando en {:start}, terminando en  {:end}'))); ?>
+          <?php 
+           // echo $this->Paginator->counter(array(
+           // 'format' => __('Página {:page} de {:pages}, mostrando {:current}    //registros de {:count}, empezando en {:start}, terminando en  //{:end}')));
+            ?>
 
           <ul class="pagination">
             <li> <?php echo $this->Paginator->prev('<'.__('previus'), array('tag' => false), null, array('class' => 'prev disabled')); ?>

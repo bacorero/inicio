@@ -18,6 +18,29 @@
 
 	</div>
 
+	<div class = "row">
+
+		<div class = "col-sm-1">
+			<?php echo "Partidos jugados - ".$player['Player']['p_jugados'];?>  
+		</div>
+
+		<div class = "col-sm-1">
+			<?php echo "Tarjetas amarillas ".$player['Player']['t_amarillas'];?>
+		</div>
+
+		<div class = "col-sm-1">
+			<?php echo "Tarjetas rojas ".$player['Player']['t_rojas'];?>
+		</div>
+
+		<div class = "col-sm-1">
+			<?php echo "Tarjetas acumuladas ".$player['Player']['t_acumuladas']; ?>
+		</div>
+
+		<div class = "col-sm-1">
+			<?php echo "Goles totales ".$player['Player']['goles'];?>
+		</div>
+
+	</div>
 
 	<diw class = "row">
 		<div class = "col-sm-3">

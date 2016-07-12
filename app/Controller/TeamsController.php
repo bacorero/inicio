@@ -1,7 +1,12 @@
 <?php
 class TeamsController extends AppController {
-	public $helpers = array('Html','Form');
-	public $components = array('Session');
+	public $helpers = array('Html','Form','Js','Time');
+	public $components = array('Session','RequestHandler');
+
+	public $paginate = array(
+		'limit' => 5,
+		'order' => array(
+		'Player.apellido' => 'asc'));
 
 	//Vemos los equipos en forma global
 	public function index(){

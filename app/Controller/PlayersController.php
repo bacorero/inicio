@@ -34,7 +34,7 @@ class PlayersController extends AppController {
 
 		$player = $this->Player->findById($id);
 		$this->set ('player', $player);
-		if(!player)
+		if(!$player)
 		{
 			throw new NotFoundException("ERROR!! Jugador no encontrado!!");
 		}
