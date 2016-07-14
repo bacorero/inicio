@@ -72,7 +72,25 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
               </ul>
             </li>
 
-            <li><a href="#contact">Jornada</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Competiciones <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><?php echo $this->Html->link('Nueva competicion',array('controller' => 'competitions', 'action' => 'nueva'),
+  array('class' => 'btn btn-sm btn-primary'));?></li>
+                <li><?php echo $this->Html->link('Clasificaciones',array('controller' => 'competitions', 'action' => 'index'),
+  array('class' => 'btn btn-sm btn-primary'));?></li>
+              </ul>
+            </li>
+
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categorias <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><?php echo $this->Html->link('Ver categorías',array('controller' => 'categorias', 'action' => 'index'),
+  array('class' => 'btn btn-sm btn-primary'));?></li>
+                <li><?php echo $this->Html->link('Crear categoría',array('controller' => 'categorias', 'action' => 'nueva'),
+  array('class' => 'btn btn-sm btn-primary'));?></li>
+              </ul>
+            </li>
 
           </ul>
         </div><!--/.nav-collapse -->
