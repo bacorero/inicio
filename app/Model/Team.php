@@ -1,7 +1,7 @@
 <?php
 class Team extends AppModel
 {
-
+	var $name = 'Team';
 	//Habilitamos los formatos de imagen de los equipos
 public $actsAs = array(
 	'Upload.Upload' => array(
@@ -28,7 +28,22 @@ public $actsAs = array(
 			'classname' => 'Player',
 			'foreignKey' => 'team_id',
 			'order' => 'Player.apellido ASC'
+			));
+
+
+	var $hasAndBelongsToMany = array(
+		//Relacion hasAndBelongsToMany con modelo Competition
+		'Competition' => array(
+			'className' => 'Competition',
+			'joinTable' => 'competitions_teams',
+			'foreignKey' => 'team_id',
+			'associationForeignKey' => 'competition_id',
+			'unique' => false
 			)
 		);
+
+	
+	
 }
 
+?>

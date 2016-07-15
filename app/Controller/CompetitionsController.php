@@ -5,7 +5,7 @@ class CompetitionsController extends AppController
 	public $components = array('Session','RequestHandler');
 
 	//Requerimos el uso de los modelos siguientes:
-	var $uses = array('Categoria','Competition');
+	var $uses = array('Categoria','Competition','Team', 'Competicion_Team');
 
 	public function index(){
 		//Creamos la lista de competiciones
@@ -36,6 +36,24 @@ class CompetitionsController extends AppController
 			$categoria[$value['Categoria']['id']] = $value['Categoria']['nombre'];
 			}
 		$this->set('grouplist', $categoria);
+
+	}
+
+	public function administrar($id = null){
+
+		//var $equipos = array();
+		//Recogemos la competicion pedida en el formulario de nueva
+		$competicion = $this->Competition->findById($id);
+		$equipo = $this->Team->findById('all');
+		$categoria = $this->Categoria->findById($competicion['categoria_id']);
+		foreach($categoria as $c){
+
+		}
+
+		$this->set('competicion',$competicion);
+		$this->set('equipos',$equipo);
+		
+
 
 	}
 
