@@ -3,6 +3,11 @@
 <?php echo $this->Form->create('Team', array('type' => 'file'));?>
 <?php echo $this->Form->input('nombre'); ?>
 <?php echo $this->Form->input('poblacion'); ?>
+<?php echo $this->Form->input('categoria_id',array(
+										'type' => 'select',
+										'options' => $grouplist
+										)
+										); ?>
 
 
 <?php echo $this->Html->image('../files/team/id_foto/'.$team['Team']['dir'].'/'.'big_'.$team['Team']['id_foto']); ?>

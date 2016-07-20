@@ -2,20 +2,19 @@
 class TeamsController extends AppController {
 	public $helpers = array('Html','Form','Js','Time');
 	public $components = array('Session','RequestHandler');
-
+	//Requerimos la tabla de las categorias y la de los equipos
+	
 	public $paginate = array(
 		'limit' => 5,
 		'order' => array(
 		'Player.apellido' => 'asc'));
 
+	var $uses = array('Categoria','Team');
+
 	//Vemos los equipos en forma global
 	public function index(){
-		$this->Team->recursive = 0;
-		//Configuramos la paginación	
-		$this->paginate['Team']['limit'] = 5; //Muestra 5 registros por página
-		$this->paginate['Team']['order'] = array('Team.nombre' =>'asc');	//Ordenados los equipos alfabeticamente
-		//Recuperamos los equipos de la BD
-		$this->set ('teams', $this->paginate());
+		$teams = $this->Team->find('all');
+		$this->set('teams',$teams);
 	}
 
 //Accion de crear nuevo equipo
@@ -88,6 +87,13 @@ public function ver($id=null)
 		{
 			$this->request->data = $team;
 		}
+
+		//Generamos la lista de categorias
+	$resultados = $this->Categoria->find('all');	
+		foreach($resultados as $value){
+			$categ[$value['Categoria']['id']] = $value['Categoria']['nombre'];
+			}
+		$this->set('grouplist', $categ);
 	}
 
 

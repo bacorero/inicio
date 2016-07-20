@@ -7,6 +7,13 @@ class Categoria extends AppModel
 			'classname' => 'Competition',
 			'foreignKey' => 'categoria_id',
 			'order' => 'Competition.temporada ASC'
+			),
+		//Relacion con la tabla Teams
+		'Team' => array(
+			'classname' => 'Team',
+			'foreignKey' => 'categoria_id'
 			)
+
+	
 		);
 }

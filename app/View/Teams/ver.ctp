@@ -5,6 +5,7 @@
     <div class = "col-sm-8">
       <p><strong>Nombre: </strong><?php echo $team['Team']['nombre'];?></p>
       <p><strong>Población: </strong><?php echo $team['Team']['poblacion'];?></p>
+      <p><strong>Categoria: </strong><?php echo $team['Categoria']['nombre']; ?><p>
     </div>
 
     <div class = "col-sm-4"> 

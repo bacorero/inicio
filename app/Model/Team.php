@@ -30,6 +30,12 @@ public $actsAs = array(
 			'order' => 'Player.apellido ASC'
 			));
 
+	//Relacion con la tabla de categorias
+	var $belongsTo = array(
+		'Categoria' => array(
+			'classname' => 'Categoria',
+			'foreignKey' => 'categoria_id')
+		);
 
 	var $hasAndBelongsToMany = array(
 		//Relacion hasAndBelongsToMany con modelo Competition

@@ -44,14 +44,22 @@ class CompetitionsController extends AppController
 		//var $equipos = array();
 		//Recogemos la competicion pedida en el formulario de nueva
 		$competicion = $this->Competition->findById($id);
-		$equipo = $this->Team->findById('all');
+		//$equipo = $this->Competition->find('list', array('fields'=>array('id','nombre')));
+		//$equipo = $competicion['Team'];
 		$categoria = $this->Categoria->findById($competicion['categoria_id']);
-		foreach($categoria as $c){
-
+		
+		foreach($competicion['Team'] as $e){
+			$marray[] = $e['nombre'];
 		}
 
+		//Calculamos el número de equipos que hay en la categoria
+		$tope = count($marray);
+
 		$this->set('competicion',$competicion);
-		$this->set('equipos',$equipo);
+		$this->set(compact('equipo'));
+		//$this->set('marray', $marray);
+		$this->set('grouplist', $marray);
+		$this->set('tope', $tope);
 		
 
 
