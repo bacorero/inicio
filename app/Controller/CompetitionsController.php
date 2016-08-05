@@ -86,10 +86,13 @@ class CompetitionsController extends AppController
 
 		//Calculamos el número de equipos que hay en la categoria
 		$tope = count($marray);
-		$arrai[] = null;
-		$data_array[] = null;
-		$cont = 0;
-		$n_jornada = 1; //Contador del número de jornada
+		$arrai[] = null;		//Vector que tiene los equipos desde la vista
+		$data_array[] = null;	//Vector para guardar los partidos en el modelo
+		$locales[] = null;		//Vector para el sorteo de equipos locales
+		$visitantes[]= null;	//Vector para el sorteo de equipos visitante
+		$cont = 0;				//Indice para recorrer vector desde la vista
+		$n_jornada = 1; 		//Contador del número de jornada
+		$tem = null;			//Variable swap
 
 
 		$this->set('competicion',$competicion);
@@ -104,22 +107,16 @@ class CompetitionsController extends AppController
 		$this->set('arrai',$arrai);//Mándalos a la vista para comprobarlos
 		$data = $arrai;
 
-		//Recorremos el array que viene de la vista y grabamos los datos en el modelo
+		//Grabamos los datos provenientes de la vista en el modelo
 		if($this->request->is('post'))
 	{
-		//Primero guardamos los datos referentes a la jornada
-		$jornada_data_array['Jornada']['nombre'] =  $arrai[0];
-		$jornada_data_array['Jornada']['competition_id'] = $id;
-		$jornada_data_array['Jornada']['jornada_numero'] = $n_jornada;
 
-		$this->Jornada->create();
-		$this->Jornada->save($jornada_data_array);
-
-
-
-		//Guardamos los datos referentes a los partidos de la jornada
+		//Grabamos los datos refernetes a la jornada
+		//$n_jornada++;
+		$this->guarda_jornada($arrai,$n_jornada,$id);
+		//Guardamos los datos referentes a los partidos de la primera jornada
 		$cont = 1;
-		for($i = 0;$i<= 2;$i++)
+		for($i = 0;$i <= ($tope/2) - 1;$i++)
 		{
 			$data_array['Partido']['equipo1'] = $arrai[$cont];
 			$data_array['Partido']['equipo1_id'] = $this->equipo_find_id($arrai[$cont]);
@@ -133,7 +130,77 @@ class CompetitionsController extends AppController
 			$this->Partido->save($data_array);
 		}
 
-		//Ahora hacemos el sorteo del resto de jornadas y los dejamos en el modelo
+
+//Realizamos el sorteo
+	//Calculamos la longitud del vector
+		$tam_l = (count($arrai)/2) - 1; //Valor de la mitad del vector
+		$tam_h = count($arrai) - 1;		//Valor del resto del vector
+	//Copiamos los equipos en un array para sortear el resto de la jornada
+		$cont = 1;
+		for($i = 0;$i <= $tam_l; $i++){
+			$locales[$i] = $arrai[$cont];
+			$cont++;
+			$visitantes[$i] = $arrai[$cont];
+			$cont++;
+		}
+
+
+	//Realizamos el sorteo
+	for($j = 1;$j <= $tam_h;$j++){
+
+		$tem = $locales[$tam_l]; //Guardo el ultimo valor del vector locales
+
+		//Desplazamos $locales un lugar hacia la derecha
+		for($i = $tam_l;$i >= 2; $i--){
+			$locales[$i] = $locales[$i-1];
+		}
+		//Insertamos el primer valor de $visitantes en $locales[1]
+		$locales[1] = $visitantes[0];
+
+		//Desplazamos $visitantes hacia la izquierda
+		for($i = 1;$i <= $tam_l; $i++){
+			$visitantes[$i-1] = $visitantes[$i];
+		}
+
+		//Copiamos el ultimo valor de visitantes con el final de $locales
+		$visitantes[$tam_l] = $tem;
+
+		//Grabamos los datos refernetes a la jornada
+		$n_jornada++;
+		$this->guarda_jornada($arrai,$n_jornada,$id);
+
+		//Grabamos en el modelo los resultados
+		for($s = 0;$s <= $tam_l;$s++){
+			$data_array['Partido']['equipo1'] = $locales[$s];
+			$data_array['Partido']['equipo1_id'] = $this->equipo_find_id($locales[$s]);
+			$data_array['Partido']['equipo2'] = $visitantes[$s];
+			$data_array['Partido']['equipo2_id'] = $this->equipo_find_id($visitantes[$s]);
+			$data_array['Partido']['jornada_id'] = $this->id_jornada();
+
+			$this->Partido->create();
+			$this->Partido->save($data_array);
+		}
+	}
+
+
+		
+//////////////////////////////////////////////////////////////////////////////
+		//Guardamos los datos referentes a los partidos de la primera jornada
+		/*$cont = 1;
+		for($i = 0;$i <= ($tope/2) - 1;$i++)
+		{
+			$data_array['Partido']['equipo1'] = $arrai[$cont];
+			$data_array['Partido']['equipo1_id'] = $this->equipo_find_id($arrai[$cont]);
+			$cont++;
+			$data_array['Partido']['equipo2'] = $arrai[$cont];
+			$data_array['Partido']['equipo2_id'] = $this->equipo_find_id($arrai[$cont]);
+			$cont++;
+			$data_array['Partido']['jornada_id'] = $this->id_jornada();
+
+			$this->Partido->create();
+			$this->Partido->save($data_array);
+		}*/
+
 		
 		
 		$this->redirect(array('action' =>'index'));
@@ -167,6 +234,16 @@ public function id_jornada(){
 		$maximo = $earray[$max-1];
 		return $maximo;
 }	
+
+public function guarda_jornada($arrai,$n_jornada,$id){
+	//Guardamos los datos referentes a la jornada
+		$jornada_data_array['Jornada']['nombre'] =  $arrai[0];
+		$jornada_data_array['Jornada']['competition_id'] = $id;
+		$jornada_data_array['Jornada']['jornada_numero'] = $n_jornada;
+
+		$this->Jornada->create();
+		$this->Jornada->save($jornada_data_array);
+}
 	
 
 }

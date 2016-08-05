@@ -30,7 +30,7 @@
 			<h2>Equipo local</h2>
 			<?php $cont = 1; ?>
 			<!-- <?php echo $this->Form->create('Competition'); ?> -->
-			<?php for($i = 1; $i<= 3; $i++){ ?>
+			<?php for($i = 1; $i<= $tope/2; $i++){ ?>
 			<input type = "text" name = "data[<?php echo $cont; ?>]" class = "juego" > 
 			<?php 
 				$cont++; } ?>
@@ -38,7 +38,7 @@
 		</div> 
 		<div class = "col-sm-4">
 			<h2>Equipo visitante</h2>
-			<?php for($i = 4; $i<= 6; $i++){ ?>
+			<?php for($i = ($tope/2)+1; $i<= $tope; $i++){ ?>
 			<input type = "text" name = "data[<?php echo $cont; ?>]" class = "juego" > 
 			<?php 
 				$cont++; } ?>
