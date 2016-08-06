@@ -13,9 +13,12 @@ class TeamsController extends AppController {
 
 	//Vemos los equipos en forma global
 	public function index(){
-		$teams = $this->Team->find('all');
-		$this->set('teams',$teams);
+	//Generamos la lista de categorias
+	$resultados = $this->Categoria->find('all');	
+		$this->set('grouplist', $resultados);
 	}
+
+
 
 //Accion de crear nuevo equipo
 
@@ -88,7 +91,7 @@ public function ver($id=null)
 			$this->request->data = $team;
 		}
 
-		//Generamos la lista de categorias
+//Generamos la lista de categorias
 	$resultados = $this->Categoria->find('all');	
 		foreach($resultados as $value){
 			$categ[$value['Categoria']['id']] = $value['Categoria']['nombre'];
@@ -96,6 +99,10 @@ public function ver($id=null)
 		$this->set('grouplist', $categ);
 	}
 
-
+//Esta función devuelve los equipos de la categoria elegida en el index
+	public function obtener($id = null){
+		$teams = $this->Team->query("SELECT * FROM teams WHERE categoria_id= $id ");
+		$this->set('teams', $teams);
+	}
 }
 ?>

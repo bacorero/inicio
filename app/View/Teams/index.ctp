@@ -1,6 +1,36 @@
+<?php echo $this->Html->script('team_jquery.js'); ?>
 <H1>EQUIPOS</H1>
-
+    <div class = "container">
       <div class="row">
+        <div class="col-md-4 col-sm-4" >
+        </div>
+
+        <div class="col-md-4 col-sm-4">
+          <select id="categoria">
+            <?php foreach($grouplist as $data): ?>
+              <option value = "<?php echo $data['Categoria']['id']; ?>"><?php echo $data['Categoria']['nombre']; ?></option>
+              <?php endforeach; ?>
+          </select>
+        </div>
+
+        <div class="col-md-4 col-sm-4" >
+        </div>
+      </div>
+      <hr>
+      <div class = "row">
+        <div class="col-md-12 col-sm-12" id = "resultado">
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+ <!--     <div class="row">
         <div class="col-md-6">
           <table class="table table-striped">
             <thead>
@@ -42,4 +72,5 @@
                   array('class' => 'btn btn-sm btn-primary')); ?>
         </div>
       </div>
+      -->
 
