@@ -1,4 +1,6 @@
 
+
+
 <br>
 <br>
 <br>
@@ -22,8 +24,10 @@
 				<td><?php echo $var['Jornada']['nombre']; ?></td>
 				<td><?php echo $this->Html->link('Ver partidos',
                   array('controller' => 'competitions', 'action' => 'partidos', $var['Jornada']['id']),
-                  array('class' => 'btn btn-sm btn-primary'));?></td>
+                  array('class' => 'btn btn-sm btn-primary'));?>
+                </td>
 			</tr>
 		<?php endforeach; ?>
 	</tbody>
-</table>
+</table> 
+

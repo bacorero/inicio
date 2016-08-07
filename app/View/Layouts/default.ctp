@@ -29,8 +29,8 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	<?php
 		echo $this->Html->meta('icon');
 
-		echo $this->Html->css(array('cake.generic','style.css','bootstrap.min.css','bootsrtap-theme.min.css'));
-		echo $this->Html->script(array('jquery.min.js','docs.min.js','bootstrap.min.js'));
+		echo $this->Html->css(array('cake.generic','jquery-ui.css','style.css','bootstrap.min.css','bootsrtap-theme.min.css'));
+		echo $this->Html->script(array('jquery.min.js','docs.min.js','bootstrap.min.js','jquery-ui.js'));
 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
@@ -48,7 +48,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/inicio">Home</a>
+          <a class="nav navbar-nav" href="/inicio">Home</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -92,19 +92,31 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
               </ul>
             </li>
 
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Actas <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><?php echo $this->Html->link('Ver actas',array('controller' => 'categorias', 'action' => 'index'),
+  array('class' => 'btn btn-sm btn-primary'));?></li>
+                <li><?php echo $this->Html->link('Crear acta',array('controller' => 'categorias', 'action' => 'nueva'),
+  array('class' => 'btn btn-sm btn-primary'));?></li>
+              </ul>
+            </li>
+
           </ul>
         </div><!--/.nav-collapse -->
       </div>
 
     </nav>
 
-    <div id="content">
-  
-    	<?php //echo $this->Flash->render(); ?>
+    <content>
+      <div id="content">
+    
+      	<?php //echo $this->Flash->render(); ?>
 
-			<?php echo $this->fetch('content'); ?>
-      
-    </div>
+  			<?php echo $this->fetch('content'); ?>
+        
+      </div>
+    </content>
     <footer >
       ADIOS
     </footer>

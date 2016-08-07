@@ -23,11 +23,25 @@ class CompetitionsController extends AppController
 	//Esta función visualiza todos los partidos de una determinada jornada
 	public function partidos($id = null){
 
+		$escudos1[] = null;
+		$escudos2[] = null;
+		$cont = 0;
+
 		$opciones = array('conditions'=>
 					array('Partido.jornada_id'=>"$id"));
 		$partidos = $this->Partido->find('all', $opciones);
 
+		$jornada = $this->Jornada->findById($id);
+
+		foreach ($partidos as $key) {
+			$escudos1[$key['Partido']['equipo1_id']] = $this->Team->findById($key['Partido']['equipo1_id']);
+			$escudos2[$key['Partido']['equipo2_id']] = $this->Team->findById($key['Partido']['equipo2_id']);
+		}
+
 		$this->set('partidos',$partidos);
+		$this->set('escudos1', $escudos1);
+		$this->set('escudos2', $escudos2);
+		$this->set('jornada', $jornada);
 
 	}
 
@@ -91,7 +105,7 @@ class CompetitionsController extends AppController
 		$locales[] = null;		//Vector para el sorteo de equipos locales
 		$visitantes[]= null;	//Vector para el sorteo de equipos visitante
 		$cont = 0;				//Indice para recorrer vector desde la vista
-		$n_jornada = 1; 		//Contador del número de jornada
+		$n_jornada = 0; 		//Contador del número de jornada
 		$tem = null;			//Variable swap
 
 
@@ -111,28 +125,9 @@ class CompetitionsController extends AppController
 		if($this->request->is('post'))
 	{
 
-		//Grabamos los datos refernetes a la jornada
-		//$n_jornada++;
-		$this->guarda_jornada($arrai,$n_jornada,$id);
-		//Guardamos los datos referentes a los partidos de la primera jornada
-		$cont = 1;
-		for($i = 0;$i <= ($tope/2) - 1;$i++)
-		{
-			$data_array['Partido']['equipo1'] = $arrai[$cont];
-			$data_array['Partido']['equipo1_id'] = $this->equipo_find_id($arrai[$cont]);
-			$cont++;
-			$data_array['Partido']['equipo2'] = $arrai[$cont];
-			$data_array['Partido']['equipo2_id'] = $this->equipo_find_id($arrai[$cont]);
-			$cont++;
-			$data_array['Partido']['jornada_id'] = $this->id_jornada();
 
-			$this->Partido->create();
-			$this->Partido->save($data_array);
-		}
-
-
-//Realizamos el sorteo
-	//Calculamos la longitud del vector
+//Preparamos los datos para el sorteo
+	//Calculamos la longitud del vector de jugadores
 		$tam_l = (count($arrai)/2) - 1; //Valor de la mitad del vector
 		$tam_h = count($arrai) - 1;		//Valor del resto del vector
 	//Copiamos los equipos en un array para sortear el resto de la jornada
@@ -177,35 +172,63 @@ class CompetitionsController extends AppController
 			$data_array['Partido']['equipo2_id'] = $this->equipo_find_id($visitantes[$s]);
 			$data_array['Partido']['jornada_id'] = $this->id_jornada();
 
+			$data_array['Partido']['estado'] = "Sin comenzar";
+
 			$this->Partido->create();
 			$this->Partido->save($data_array);
 		}
 	}
 
-
-		
-//////////////////////////////////////////////////////////////////////////////
-		//Guardamos los datos referentes a los partidos de la primera jornada
-		/*$cont = 1;
-		for($i = 0;$i <= ($tope/2) - 1;$i++)
-		{
-			$data_array['Partido']['equipo1'] = $arrai[$cont];
-			$data_array['Partido']['equipo1_id'] = $this->equipo_find_id($arrai[$cont]);
-			$cont++;
-			$data_array['Partido']['equipo2'] = $arrai[$cont];
-			$data_array['Partido']['equipo2_id'] = $this->equipo_find_id($arrai[$cont]);
-			$cont++;
-			$data_array['Partido']['jornada_id'] = $this->id_jornada();
-
-			$this->Partido->create();
-			$this->Partido->save($data_array);
-		}*/
-
-		
+	//Volvemos al indice
 		
 		$this->redirect(array('action' =>'index'));
 	}
 }
+
+//Esta accion hece crear un acta de partido
+	public function actas_crear($id){
+
+		$data_array[] = null;
+		$datos[] = null;
+		//Buscamos la informacion del partido
+		$partido = $this->Partido->findById($id);
+		$this->set('partido',$partido);
+
+		$jornada = $this->Jornada->findById($partido['Partido']['jornada_id']);
+		$this->set('jornada', $jornada);
+
+		//Buscamos la informacion de los equipos
+		$equipo_l = $this->Team->findById($partido['Partido']['equipo1_id']);
+		$equipo_v = $this->Team->findById($partido['Partido']['equipo2_id']);
+		$this->set('equipo_l', $equipo_l);
+		$this->set('equipo_v', $equipo_v);
+
+		//Recoge los valores de la vista
+		$datos = $this->request->data;
+
+		//Grabamos los datos provenientes de la vista en el modelo
+		if($this->request->is(array('post','put')))
+		{
+			$this->Partido->id = $id;
+			$data_array['Partido']['equipo1_gol'] = $datos[1];
+			$data_array['Partido']['equipo2_gol'] = $datos[2];
+			$data_array['Partido']['equipo1_gol_contra'] = $datos[2];
+			$data_array['Partido']['equipo2_gol_contra'] = $datos[1];
+			$data_array['Partido']['estado'] = $datos[3];
+
+			$this->Partido->save($data_array);
+
+			//Volvemos al indice
+		
+			$this->redirect(array('action' =>'partidos', $partido['Partido']['jornada_id']));
+			
+		}
+		
+
+
+
+	}
+
 
 //Esta función recupera el id de un equipo en función de su nombre
 	public function equipo_find_id($nombre){

@@ -34,6 +34,7 @@ class PlayersController extends AppController {
 
 		$player = $this->Player->findById($id);
 		$this->set ('player', $player);
+
 		if(!$player)
 		{
 			throw new NotFoundException("ERROR!! Jugador no encontrado!!");
@@ -87,6 +88,7 @@ public function fichar($id = null){
 		{
 			$this->request->data = $player;
 		}
+		
 		//Generamos la lista de equipos
 	$resultados = $this->Team->find('all');	
 		foreach($resultados as $value){

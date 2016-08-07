@@ -1,6 +1,19 @@
 .aderechas{
 	float:right;
 }
+
+.marcador_r{
+	font-size: 3em;
+	float:left;
+	margin-right:20px;
+
+}
+.marcador_l{
+	font-size: 3em;
+	float:right;
+	margin-left:20px;
+
+}
 #content{
 }
 

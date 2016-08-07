@@ -19,13 +19,16 @@
                   { ?>
                     <td><?php echo $catego['Categoria']['nombre'] ?></td>
                   <?php } endforeach; ?>
-                <td><?php echo $this->Html->link('Ver',
+                <td>
+                  <?php echo $this->Html->link('Ver',
                   array('controller' => 'competitions', 'action' => 'ver', $cats['Competition']['id']),
                     array('class' => 'btn btn-sm btn-primary'));?>
 
-                    <?php echo $this->Html->link('Administrar',
+                  <?php echo $this->Html->link('Administrar',
                   array('controller' => 'competitions', 'action' => 'administrar', $cats['Competition']['id']),
                     array('class' => 'btn btn-sm btn-primary'));?>
+
+                  
                 </td>
                 
               </tr>
