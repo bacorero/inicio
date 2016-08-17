@@ -5,7 +5,7 @@ class CompetitionsController extends AppController
 	public $components = array('Session','RequestHandler');
 
 	//Requerimos el uso de los modelos siguientes:
-	var $uses = array('Categoria','Competition','Team', 'Competition_Team','Partido','Jornada');
+	var $uses = array('Categoria','Competition','Team', 'Competition_Team','Partido','Jornada','Arbitro');
 
 	public function index(){
 		//Creamos la lista de competiciones
@@ -141,7 +141,7 @@ class CompetitionsController extends AppController
 
 
 	//Realizamos el sorteo
-	for($j = 1;$j <= $tam_h;$j++){
+	for($j = 2;$j <= $tam_h;$j++){
 
 		$tem = $locales[$tam_l]; //Guardo el ultimo valor del vector locales
 
@@ -162,7 +162,11 @@ class CompetitionsController extends AppController
 
 		//Grabamos los datos refernetes a la jornada
 		$n_jornada++;
-		$this->guarda_jornada($arrai,$n_jornada,$id);
+		////////////////////////////////
+		$fecha = $arrai[0];
+		$nfecha = date('Y-m-d',strtotime("$fecha) + 7 day"));
+		///////////////////////////////
+		$this->guarda_jornada($fecha,$n_jornada,$id);
 
 		//Grabamos en el modelo los resultados
 		for($s = 0;$s <= $tam_l;$s++){
@@ -197,6 +201,10 @@ class CompetitionsController extends AppController
 		$jornada = $this->Jornada->findById($partido['Partido']['jornada_id']);
 		$this->set('jornada', $jornada);
 
+		//Buscamos los árbitros disponibles
+		$arbitros = $this->Arbitro->find('all');
+		$this->set('arbitros', $arbitros);
+
 		//Buscamos la informacion de los equipos
 		$equipo_l = $this->Team->findById($partido['Partido']['equipo1_id']);
 		$equipo_v = $this->Team->findById($partido['Partido']['equipo2_id']);
@@ -216,7 +224,18 @@ class CompetitionsController extends AppController
 			$data_array['Partido']['equipo2_gol_contra'] = $datos[1];
 			$data_array['Partido']['estado'] = $datos[3];
 
-			$this->Partido->save($data_array);
+	//Miramos que el árbitro no esté arbitrando otro partido en esta misma jornada
+			$id_del_partido = $partido['Partido']['jornada_id'];
+			$id_del_arbitro = $datos[4];
+
+			if($this->comprueba_arbitro($id_del_partido,$id_del_arbitro))
+			{
+				$data_array['Partido']['arbitro_id'] = $datos[4];
+				$this->Partido->save($data_array);
+			}
+			else{
+				//Mensaje de error
+			}
 
 			//Volvemos al indice
 		
@@ -257,6 +276,21 @@ public function id_jornada(){
 		$maximo = $earray[$max-1];
 		return $maximo;
 }	
+
+//Esta función mira si existe un arbitro arbitrando en una misma jornada
+public function comprueba_arbitro($id=null,$arbitro_id=null){
+	$flag = true;
+	$partidos = $this->Partido->query("SELECT * FROM partidos WHERE jornada_id = $id");
+	foreach($partidos as $var){
+		if($var['partidos']['arbitro_id'] == $arbitro_id)
+		{
+			$flag = false;
+		}
+	return $flag;
+	}
+
+
+}
 
 public function guarda_jornada($arrai,$n_jornada,$id){
 	//Guardamos los datos referentes a la jornada

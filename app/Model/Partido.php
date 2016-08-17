@@ -5,6 +5,9 @@ class Partido extends AppModel
 		var $belongsTo = array(
 		'Team' => array(
 			'classname' => 'Jornada',
-			'foreignKey' => 'jornada_id')
+			'foreignKey' => 'jornada_id'),
+		'Arbitro' => array(
+			'classname' => 'Arbitro',
+			'foreignKey' => 'arbitro_id')
 		);
 }

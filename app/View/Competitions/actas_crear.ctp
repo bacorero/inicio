@@ -40,10 +40,23 @@
 				<option>Descanso</option>
 				<option>2ª parte</option>
 				<option>Finalizado</option>
+			</select> 
+		</div>
+		<div class = "col-sm-6">
+		</div>
+	</div>
+
+	<div class = "row">
+		<div class = "col-sm-6">
+			<label for "data[4]">Arbitro</label>
+			<select name="data[4]">value="data[4]"
+				<?php foreach($arbitros as $arb): ?>
+					<option value="<?php echo $arb['Arbitro']['id']; ?>"><?php echo $arb['Arbitro']['nombre']; ?></option>
+				<?php endforeach; ?>
 			</select>
 		</div>
 		<div class = "col-sm-6">
 			<?php echo $this->Form->end('Modificar Acta'); ?>
 		</div>
-	</div>
+	</div> 
 </div>	
