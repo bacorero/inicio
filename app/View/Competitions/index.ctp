@@ -23,10 +23,12 @@
                   <?php echo $this->Html->link('Ver',
                   array('controller' => 'competitions', 'action' => 'ver', $cats['Competition']['id']),
                     array('class' => 'btn btn-sm btn-primary'));?>
-
+                    
+                  <?php if($current_user['role'] == 'admin'): ?>
                   <?php echo $this->Html->link('Administrar',
                   array('controller' => 'competitions', 'action' => 'administrar', $cats['Competition']['id']),
                     array('class' => 'btn btn-sm btn-primary'));?>
+                  <?php endif; ?>
 
                   
                 </td>

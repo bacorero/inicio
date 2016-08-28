@@ -1,11 +1,12 @@
 <?php echo $this->Html->script('team_jquery.js'); ?>
-<H1>EQUIPOS</H1>
+<h2>Ver Equipos</h2>
     <div class = "container">
       <div class="row">
         <div class="col-md-4 col-sm-4" >
         </div>
 
         <div class="col-md-4 col-sm-4">
+        <h4>Seleccione una categoria</h4>
           <select id="categoria">
             <?php foreach($grouplist as $data): ?>
               <option value = "<?php echo $data['Categoria']['id']; ?>"><?php echo $data['Categoria']['nombre']; ?></option>

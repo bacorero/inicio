@@ -21,7 +21,7 @@ class CompetitionsController extends AppController
 	}
 
 	//Esta función visualiza todos los partidos de una determinada jornada
-	public function partidos($id = null){
+	public function partidos($id = null, $id_jornada=null){
 
 		$escudos1[] = null;
 		$escudos2[] = null;
@@ -42,6 +42,7 @@ class CompetitionsController extends AppController
 		$this->set('escudos1', $escudos1);
 		$this->set('escudos2', $escudos2);
 		$this->set('jornada', $jornada);
+		$this->set('id_jornada', $id_jornada);
 
 	}
 
@@ -75,6 +76,7 @@ class CompetitionsController extends AppController
 		$jornada = $this->Jornada->find('all', $opciones);
 
 		$this->set('jornada', $jornada);
+		$this->set('id_jornada', $id_jornada);
 
 	}
 

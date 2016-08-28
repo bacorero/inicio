@@ -3,7 +3,10 @@
 <div class = "container-fluid">
   <div class = "row">
     <div class = "col-sm-8">
-      <p><strong>Nombre: </strong><?php echo $team['Team']['nombre'];?></p>
+      <p><strong>Nombre del equipo: </strong><?php echo $team['Team']['nombre'];?></p>
+      <p><strong>Persona de contacto: </strong><?php echo $team['Team']['contacto'];?></p>
+      <p><strong>Telefono: </strong><?php echo $team['Team']['telefono'];?></p>
+      <p><strong>Direccion: </strong><?php echo $team['Team']['direccion'];?></p>
       <p><strong>Población: </strong><?php echo $team['Team']['poblacion'];?></p>
       <p><strong>Categoria: </strong><?php echo $team['Categoria']['nombre']; ?><p>
     </div>
@@ -11,6 +14,25 @@
     <div class = "col-sm-4"> 
       <?php echo $this->Html->image('../files/team/id_foto/'.$team['Team']['dir'].'/'.'big_'.$team['Team']['id_foto']); ?>
     </div>
+  </div>
+  <div class = "row">
+
+    <div class = "col-sm-3">
+      <?php //Enlace para modificar los equipos
+      echo $this->Html->link('Modificar',array('controller' => 'teams', 'action' => 'editar', $team['Team']['id']),
+      array('class' => 'btn btn-danger'));?>
+    </div>
+
+    <div class = "col-sm-3">
+      <?php //Enlace para volver a la página anterior
+      echo $this->Html->link('Volver',array('controller' => 'teams', 'action' => 'index'),
+      array('class' => 'btn btn-primary')); ?>
+    </div>
+
+    <div class = "col-sm-3">
+
+    </div>
+
   </div>
 
   <div class = "row">
@@ -44,7 +66,7 @@
                         'controller' => 'players', 
                         'action' => 'ver', 
                         $var['id']),
-                    array('class' => 'btn btn-sm btn-primary'));
+                    array('class' => 'btn btn-sm btn-success'));
                  ?>
                   </td>
               </tr>
@@ -54,25 +76,7 @@
     </div>
   </div>
 
-  <div class = "row">
 
-    <div class = "col-sm-3">
-      <?php //Enlace para modificar los equipos
-      echo $this->Html->link('Modificar',array('controller' => 'teams', 'action' => 'editar', $team['Team']['id']),
-      array('class' => 'btn btn-sm btn-primary'));?>
-    </div>
-
-    <div class = "col-sm-3">
-      <?php //Enlace para volver a la página anterior
-      echo $this->Html->link('Volver',array('controller' => 'teams', 'action' => 'index'),
-      array('class' => 'btn btn-sm btn-primary')); ?>
-    </div>
-
-    <div class = "col-sm-3">
-
-    </div>
-
-  </div>
 </div>
 
 

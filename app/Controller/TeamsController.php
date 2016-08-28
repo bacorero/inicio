@@ -24,17 +24,34 @@ class TeamsController extends AppController {
 
 public function nuevo(){
 
+	$datos[] = null;
+	$data_array[] = null;
+
+	//Generamos la lista para elegir la categorias
+	$resultados = $this->Categoria->find('all');	
+		$this->set('grouplist', $resultados);
+
 	if($this->request->is('post'))
 	{
-		if($this->Team->save($this->request->data))
+		$datos = $this->request->data;
+
+		if($this->request->is(array('post')))
 		{
-			//$this->Session->setFlash('El jugador ha sido creado');
-			$this->Flash->sucess('Equipo creado con éxito');
-			return $this->redirect(array('action' => 'index'));
-		}
+			//$this->Team->id = $id;
+			$data_array['Team']['nombre'] = $datos[1];
+			$data_array['Team']['contacto'] = $datos[2];
+			$data_array['Team']['direccion'] = $datos[3];
+			$data_array['Team']['poblacion'] = $datos[4];
+			$data_array['Team']['telefono'] = $datos[5];
+			$data_array['Team']['categoria_id'] = $datos[6];
+			$this->Team->create();
+			$this->Team->save($data_array);
+			//$this->Flash->sucess('Equipo creado con exito');
+			return $this->redirect(array('action' =>'index'));
 
 		//$this->Session->setFlash('No se pudo crear el jugador');
 		$this->Flash->sucess('No se pudo crear el jugador');
+		}
 	}
 }
 
@@ -63,6 +80,14 @@ public function ver($id=null)
 
 //Editamos los equipos
 	public function editar($id = null){
+
+		$datos[] = null;
+		$data_array[] = null;
+
+		//Generamos la lista para elegir la categorias
+		$resultados = $this->Categoria->find('all');	
+		$this->set('grouplist', $resultados);
+
 		if(!$id)
 		{
 			throw new NotFoundException("ERROR! Equipo no encontrado!!");
@@ -75,15 +100,20 @@ public function ver($id=null)
 			throw new NotFoundException("ERROR!! Equipo no encontrado!!");
 		}
 
+		$datos = $this->request->data;
+
 		if($this->request->is(array('post','put')))
 		{
 			$this->Team->id = $id;
-			if($this->Team->save($this->request->data))
-			{
-				//$this->Session->setFlash('Equipo correctamente modificado');
-				return $this->redirect(array('action' =>'index'));
-			}
-			$this->Session->setFlash('El equipo no pudo ser modificado');
+			$data_array['Team']['nombre'] = $datos[1];
+			$data_array['Team']['contacto'] = $datos[2];
+			$data_array['Team']['direccion'] = $datos[3];
+			$data_array['Team']['poblacion'] = $datos[4];
+			$data_array['Team']['telefono'] = $datos[5];
+			$data_array['Team']['categoria_id'] = $datos[6];
+
+			$this->Team->save($data_array);
+			return $this->redirect(array('action' =>'index'));
 		}
 
 		if(!$this->request->data)
@@ -91,12 +121,6 @@ public function ver($id=null)
 			$this->request->data = $team;
 		}
 
-//Generamos la lista de categorias
-	$resultados = $this->Categoria->find('all');	
-		foreach($resultados as $value){
-			$categ[$value['Categoria']['id']] = $value['Categoria']['nombre'];
-			}
-		$this->set('grouplist', $categ);
 	}
 
 //Esta función devuelve los equipos de la categoria elegida en el index
@@ -104,5 +128,19 @@ public function ver($id=null)
 		$teams = $this->Team->query("SELECT * FROM teams WHERE categoria_id= $id ");
 		$this->set('teams', $teams);
 	}
+
+	//Acción de eliminar un equipo
+public function eliminar($id)
+{
+	if($this->request->is('post'))
+	{
+		throw new MethodNotAllowedException('Método de eliminación incorrecto');
+	}
+	if($this->Team->delete($id))
+	{
+		$this->Session->setFlash('Equipo eliminado',$element = 'default', $params = array('class'=> 'sucess'));
+		return $this->redirect(array('action' => 'index'));
+	}
+}
 }
 ?>

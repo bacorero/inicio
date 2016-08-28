@@ -23,7 +23,7 @@
 				<td><?php echo $var['Jornada']['jornada_numero']; ?></td>
 				<td><?php echo $var['Jornada']['nombre']; ?></td>
 				<td><?php echo $this->Html->link('Ver partidos',
-                  array('controller' => 'competitions', 'action' => 'partidos', $var['Jornada']['id']),
+                  array('controller' => 'competitions', 'action' => 'partidos', $var['Jornada']['id'], $id_jornada),
                   array('class' => 'btn btn-sm btn-primary'));?>
                 </td>
 			</tr>

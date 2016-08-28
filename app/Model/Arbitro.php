@@ -10,5 +10,11 @@ class Arbitro extends AppModel
 			'foreignKey' => 'arbitro_id'
 			));
 
+	var $belongsTo = array(
+		'User' => array(
+			'classname' => 'User',
+			'foreignKey' => 'user_id')
+		);
+
 }
 ?>
