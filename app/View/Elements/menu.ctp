@@ -18,6 +18,16 @@
 
             <?php if($current_user['role'] == 'admin'): ?>
             <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Jugadores<span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><?php echo $this->Html->link('Ver jugadores', array('controller' => 'players', 'action' => 'index')) ?></li>
+                <li><?php echo $this->Html->link('Nuevo jugador', array('controller' => 'players', 'action' => 'nuevo')) ?></li>
+              </ul>
+            </li>
+            <?php endif; ?>
+
+<?php if($current_user['role'] == 'admin'): ?>
+            <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Equipos<span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <li><?php echo $this->Html->link('Ver equipos', array('controller' => 'teams', 'action' => 'index')) ?></li>

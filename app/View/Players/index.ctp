@@ -9,7 +9,7 @@
 ?>
     <div id="contenedor-players">
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12 col-sm-12">
         <!--
         <div class="progress oculto" id="procesando">
           <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
@@ -20,10 +20,9 @@
           <table class="table table-striped">
             <thead>
               <tr>
-                <th>DNI</th>
+                <th>Foto</th>
                 <th>Nombre</th>
                 <th>Apellido</th>
-                <th>Foto</th>
                 <th>Teléfono</th>
                 <th>Acción</th>
               </tr>
@@ -32,18 +31,28 @@
 
             <?php foreach($players as $play):?>
               <tr>
-                <td><?php echo $play['Player']['dni']; ?></td>
+             <!-- campo de la foto -->
+                <td><?php echo $this->Html->image('../files/player/id_foto/'.$play['Player']['dir'].'/'.'thumb_'.$play['Player']['id_foto']); ?></td>
                 <td><?php echo $play['Player']['nombre']; ?></td>
                 <td><?php echo $play['Player']['apellido']; ?></td>
-                
-<!-- campo de la foto -->
-                <td><?php echo $this->Html->image('../files/player/id_foto/'.$play['Player']['dir'].'/'.'thumb_'.$play['Player']['id_foto']); ?></td>
+              
+               
 
 				        <td><?php echo $play['Player']['telefono']; ?></td>
                 <td>
                 <?php echo $this->Html->link('Ver',
                   array('controller' => 'players', 'action' => 'ver', $play['Player']['id']),
-                    array('class' => 'btn btn-sm btn-primary'));?>
+                    array('class' => 'btn btn-primary'));?>
+                  </td>
+                                    <td>
+                <?php echo $this->Html->link('Modificar',
+                  array('controller' => 'players', 'action' => 'editar', $play['Player']['id']),
+                    array('class' => 'btn btn-success')); ?>
+                  </td>
+                  <td>
+                <?php echo $this->Html->link('Eliminar',
+                  array('controller' => 'players', 'action' => 'eliminar', $play['Player']['id']),
+                    array('class' => 'btn btn-danger')); ?>
                   </td>
               </tr>
              <?php endforeach; ?>

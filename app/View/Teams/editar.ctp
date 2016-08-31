@@ -14,7 +14,7 @@
 				<div class ="form-group">
 
 					<label for="nombre">Nombre del club</label>
-					<input type="mbretext" class="form-control" id="nombre" value =" <?php echo $team['Team']['nombre']; ?>" name="data[1]">
+					<input type="text" class="form-control" id="nombre" value =" <?php echo $team['Team']['nombre']; ?>" name="data[1]">
 
 					<label for="contacto">Persona de contacto</label>
 					<input type="text" class="form-control" id="contacto" value = "<?php echo $team['Team']['contacto']; ?>" name="data[2]" >
@@ -27,6 +27,12 @@
 
 					<label for="telefono">Telefono contacto</label>
 					<input type="text" class="form-control" id="telefono" value = " <?php echo $team['Team']['telefono']; ?>" name="data[5]" >
+
+					<label for="created">Fecha de creacion</label>
+					<input type="text" readonly="readonly" class="form-control" id="created" value = " <?php echo $team['Team']['created']; ?>" >
+
+					<label for="telefono">Fecha última modificación</label>
+					<input type="text" readonly="readonly" class="form-control" id="modified" value = " <?php echo $team['Team']['modified']; ?>">
 
 					<input type="text" id="valor_categoria" value="<?php echo $team['Team']['categoria_id']; ?>" style="visibility:hidden">
 				</div>			

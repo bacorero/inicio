@@ -8,6 +8,8 @@
       <p><strong>Telefono: </strong><?php echo $team['Team']['telefono'];?></p>
       <p><strong>Direccion: </strong><?php echo $team['Team']['direccion'];?></p>
       <p><strong>Población: </strong><?php echo $team['Team']['poblacion'];?></p>
+      <p><strong>Fecha de inserción: </strong><?php echo $team['Team']['created'];?></p>
+      <p><strong>Fecha última modificación: </strong><?php echo $team['Team']['modified'];?></p>
       <p><strong>Categoria: </strong><?php echo $team['Categoria']['nombre']; ?><p>
     </div>
 

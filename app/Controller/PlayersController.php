@@ -23,6 +23,8 @@ class PlayersController extends AppController {
 	//$this->set ('players', $this->Player->find('all'));
 
 	$this->set ('players', $this->paginate());
+
+	
 	}
 
 //Editamos los jugadores
