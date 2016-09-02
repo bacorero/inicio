@@ -8,12 +8,24 @@
 			<p><strong>Nombre: </strong><?php echo $player['Player']['nombre'];?></p>
 			<p><strong>Apellidos: </strong><?php echo $player['Player']['apellido'];?></p>
 			<p><strong>Teléfono: </strong><?php echo $player['Player']['telefono'];?></p>
+			<p><strong>Fecha de nacimiento: </strong><?php echo $player['Player']['f_nacimiento'];?></p>
+			<p><strong>Nacionalidad: </strong><?php echo $player['Player']['nacionalidad'];?></p>
+			<p><strong>Dorsal: </strong><?php echo $player['Player']['dorsal'];?></p>
 			<p><strong>Fecha de creación: </strong><?php echo $player['Player']['created'];?></p>
 			<p><strong>Fecha última modificación: </strong><?php echo $player['Player']['modified'];?></p>
 			<p><strong>Equipo: </strong><?php echo $equipos;?></p>
 		</div>
 		<div class = "col-sm-4">	
 			<?php echo $this->Html->image('../files/player/id_foto/'.$player['Player']['dir'].'/'.'big_'.$player['Player']['id_foto']); ?>
+		</div>
+		<div>
+			<br>
+			<br>
+			<br>
+			<label for="observaciones">Observaciones</label>
+			<textarea id="observaciones" rows="2" cols="25" readonly="readonly" style="resize:none">
+				<?php echo $player['Player']['observaciones']; ?>
+			</textarea>
 		</div>
 	</div>
 

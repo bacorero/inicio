@@ -34,6 +34,9 @@ class PlayersController extends AppController {
 			throw new NotFoundException("ERROR! Jugador no encontrado!!");
 		}
 
+		$datos[] = null;
+		$data_array[] = null;
+
 		$player = $this->Player->findById($id);
 		$this->set ('player', $player);
 
@@ -42,16 +45,32 @@ class PlayersController extends AppController {
 			throw new NotFoundException("ERROR!! Jugador no encontrado!!");
 		}
 
+		$datos = $this->request->data;
+
 		if($this->request->is(array('post','put')))
 		{
 			$this->Player->id = $id;
-			if($this->Player->save($this->request->data))
-			{
-				$this->Session->setFlash('Jugador correctamente modificado', $element ='default',
-				$params = array('class' => 'sucess'));
-				return $this->redirect(array('action' =>'index'));
-			}
-			$this->Session->setFlash('El jugador no pudo ser modificado');
+			$data_array['Player']['nombre'] = $datos[1];
+			$data_array['Player']['apellido'] = $datos[2];
+			$data_array['Player']['direccion'] = $datos[3];
+			$data_array['Player']['dni'] = $datos[4];
+			$data_array['Player']['telefono'] = $datos[5];
+			$data_array['Player']['nacionalidad'] = $datos[6];
+			$data_array['Player']['f_nacimiento'] = $datos[7];
+			$data_array['Player']['observaciones'] = $datos[8];
+			$data_array['Player']['g_recibidos'] = $datos[9];
+			$data_array['Player']['t_amarillas'] = $datos[10];
+			$data_array['Player']['t_rojas'] = $datos[11];
+			$data_array['Player']['t_acumuladas'] = $datos[12];
+			$data_array['Player']['goles'] = $datos[13];
+			$data_array['Player']['p_jugados'] = $datos[14];
+			$data_array['Player']['p_sancionados'] = $datos[15];
+			$data_array['Player']['dorsal'] = $datos[16];
+			$data_array['Player']['id_foto'] =$datos[17];
+			$data_array['Player']['dir'] =$datos[18];
+
+			$this->Player->save($data_array);
+			return $this->redirect(array('action' =>'index'));
 		}
 
 		if(!$this->request->data)
@@ -105,18 +124,37 @@ public function fichar($id = null){
 
 public function nuevo(){
 
+	$datos[] = null;
+	$data_array[] = null;
+
 	if($this->request->is('post'))
 	{
-		$this->Player->create();
-		if($this->Player->save($this->request->data))
-		{
-			//$this->Session->setFlash('El jugador ha sido creado');
-			$this->Flash->sucess('Jugador creado con éxito');
-			return $this->redirect(array('action' => 'index'));
-		}
+		$datos = $this->request->data;
 
-		//$this->Session->setFlash('No se pudo crear el jugador');
-		$this->Flash->sucess('No se pudo crear el jugador');
+
+		$data_array['Player']['nombre'] = $datos[1];
+		$data_array['Player']['apellido'] = $datos[2];
+		$data_array['Player']['direccion'] = $datos[3];
+		$data_array['Player']['dni'] = $datos[4];
+		$data_array['Player']['telefono'] = $datos[5];
+		$data_array['Player']['nacionalidad'] = $datos[6];
+		$data_array['Player']['f_nacimiento'] = $datos[7];
+		$data_array['Player']['observaciones'] = $datos[8];
+		$data_array['Player']['g_recibidos'] = $datos[9];
+		$data_array['Player']['t_amarillas'] = $datos[10];
+		$data_array['Player']['t_rojas'] = $datos[11];
+		$data_array['Player']['t_acumuladas'] = $datos[12];
+		$data_array['Player']['goles'] = $datos[13];
+		$data_array['Player']['p_jugados'] = $datos[14];
+		$data_array['Player']['p_sancionados'] = $datos[15];
+		$data_array['Player']['dorsal'] = $datos[16];
+		$data_array['Player']['id_foto'] =$datos['id_foto'];
+		$data_array['Player']['dir'] =$datos['dir'];
+
+		$this->Player->create();
+		$this->Player->save($data_array);
+		//$this->Flash->sucess('Equipo creado con exito');
+		return $this->redirect(array('action' =>'index'));
 	}
 }
 

@@ -9,7 +9,6 @@
 <?php echo $this->Form->create('Team', array('type' => 'file'));?>
 <div class="container">
 	<div class="row">
-
 		<div class="col col-sm-8">
 				<div class ="form-group">
 
@@ -45,8 +44,10 @@
 			<?php echo $this->Form->input('id_foto.file.remove',array('type' =>'hidden')); ?>
 
 <!-- campo para modificar la foto -->
-			<?php echo $this->Form->input('id_foto', array('type' => 'file', 'label' => 'Cambiar Foto','class' => 'btn btn-sm btn-primary'));
-      		echo $this->Form->input('dir',array('type' =>'hidden')); 
+			<input type="file" name="data[7]">
+			<input type="hidden" name="data[8]">
+			<?php //echo $this->Form->input('id_foto', array('type' => 'file', 'label' => 'Cambiar Foto','class' => 'btn btn-sm btn-primary'));
+      		//echo $this->Form->input('dir',array('type' =>'hidden')); 
 			?>
 
 						<h4>Seleccione una categoria</h4>
@@ -70,6 +71,6 @@
 			<?php //echo $this->Form->end('Modificar equipo',array('class' => 'btn btn-sm btn-primary')); ?>
 			<?php echo $this->Html->link('Cancelar',array('controller' => 'teams', 'action' => 'index'),
 				array('class' => 'btn btn-primary')); ?>
-			</div>
+		</div>
 	</div>
 </div>

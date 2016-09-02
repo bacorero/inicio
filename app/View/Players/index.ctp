@@ -54,6 +54,11 @@
                   array('controller' => 'players', 'action' => 'eliminar', $play['Player']['id']),
                     array('class' => 'btn btn-danger')); ?>
                   </td>
+                  <td>
+                <?php echo $this->Html->link('Fichar',
+                  array('controller' => 'players', 'action' => 'fichar', $play['Player']['id']),
+                    array('class' => 'btn btn-danger')); ?>
+                  </td>
               </tr>
              <?php endforeach; ?>
             </tbody>

@@ -44,6 +44,8 @@ public function nuevo(){
 			$data_array['Team']['poblacion'] = $datos[4];
 			$data_array['Team']['telefono'] = $datos[5];
 			$data_array['Team']['categoria_id'] = $datos[6];
+			$data_array['Team']['id_foto'] = $datos[7];
+			$data_array['Team']['dir'] = $datos[8];
 			$this->Team->create();
 			$this->Team->save($data_array);
 			//$this->Flash->sucess('Equipo creado con exito');
@@ -111,6 +113,8 @@ public function ver($id=null)
 			$data_array['Team']['poblacion'] = $datos[4];
 			$data_array['Team']['telefono'] = $datos[5];
 			$data_array['Team']['categoria_id'] = $datos[6];
+			$data_array['Team']['id_foto'] = $datos[7];
+			$data_array['Team']['dir'] = $datos[8];
 
 			$this->Team->save($data_array);
 			return $this->redirect(array('action' =>'index'));

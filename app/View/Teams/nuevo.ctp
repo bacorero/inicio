@@ -29,8 +29,11 @@
 			<?php echo $this->Form->input('id_foto.file.remove',array('type' =>'hidden')); ?>
 
 <!-- campo para modificar la foto -->
-			<?php echo $this->Form->input('id_foto', array('type' => 'file', 'label' => 'Subir Foto','class' => 'btn btn-primary'));
-      		echo $this->Form->input('dir',array('type' =>'hidden')); 
+
+			<input type="file" name="data[7]">
+			<input type="hidden" name="data[8]">
+			<?php //echo $this->Form->input('id_foto', array('type' => 'file', 'label' => 'Subir Foto','class' => 'btn btn-primary'));
+      		//echo $this->Form->input('dir',array('type' =>'hidden')); 
 			?>
 
 			<h4>Seleccione una categoria</h4>
