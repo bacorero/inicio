@@ -66,7 +66,7 @@
 
 		<div class="col col-sm-12"> 
 			<input type="submit" value="Modificar" class="btn btn-danger" />
-			<?php echo $this->Html->link('Cancelar',array('controller' => 'teams', 'action' => 'index'),
+			<?php echo $this->Html->link('Cancelar',array('controller' => 'players', 'action' => 'index'),
 				array('class' => 'btn btn-primary')); ?>
 		</div>
 

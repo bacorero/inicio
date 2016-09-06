@@ -82,27 +82,47 @@ class PlayersController extends AppController {
 //Accion de fichar a un jugador
 public function fichar($id = null){
 
-	//$resultados = $this->Team->find('all');
+	$datos[] = null;
+	$data_array[] = null;
+	$equipo=null;
+	$jugador_equipo = null;
+
+
+	//Generamos la lista de equipos
+	$resultados = $this->Team->find('all');	
+	$this->set('grouplist', $resultados);
+
 	$player = $this->Player->findById($id);
+	$this->set('player',$player);
+	
+	//cangeamos la clave foránea del jugador a equipo
+	$jugador_equipo = $player['Player']['team_id'];
+
+	$equipo = $this->Team->query("SELECT nombre FROM teams WHERE id = $jugador_equipo");
+	$this->set('equipo_act',$equipo);
+
 	//Comprobamos que existe jugador a fichar
 	if(!$id)
 		{
 			throw new NotFoundException("ERROR! Jugador no encontrado!!");
 		}
 		
-		if(!player)
+		if(!$player)
 		{
 			throw new NotFoundException("ERROR!! Jugador no encontrado!!");
 		}
 
+		//recoge los datos del formulario
+		$datos = $this->request->data;
 		if($this->request->is(array('post','put')))
 		{
 			$this->Player->id = $id;
-			if($this->Player->save($this->request->data))
-			{
-				return $this->redirect(array('action' =>'index'));
-			}
-			$this->Session->setFlash('El jugador no ha podido fichar por el equipo');
+			$data_array['Player']['team_id'] = $datos[1];
+			$this->Player->save($data_array);
+			
+			return $this->redirect(array('action' =>'index'));
+			
+			$this->Session->setFlash('El jugador ha fichado por el equipo');
 		}
 
 		if(!$this->request->data)
@@ -110,14 +130,6 @@ public function fichar($id = null){
 			$this->request->data = $player;
 		}
 		
-		//Generamos la lista de equipos
-	$resultados = $this->Team->find('all');	
-		foreach($resultados as $value){
-			$equipos[$value['Team']['id']] = $value['Team']['nombre'];
-			}
-		$this->set('grouplist', $equipos);
-
-
 }
 
 //Accion de crear nuevo jugador

@@ -50,7 +50,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
   <?php //endif; ?>
 
     <div class="container" role="main">
-
+  
       <?php echo $this->Session->flash(); ?>
       <?php echo $this->Session->flash('auth'); ?>
 
