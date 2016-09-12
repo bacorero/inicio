@@ -5,13 +5,20 @@
 			$('#fichar').click(function(){
 				if(confirm("Fichar jugador?"))
 				{
-					alert("confirmado");
+					var valor = $("#equipo").val();
+					alert("Fichado por el equipo " + valor);
 				}
+				else{
+					var valor = $("#valor_equipo").val();
+					alert("El jugador sigue en el equipo " + valor);
+				}
+
+				$('#equipo > option[value= '+valor+']').attr('selected','selected');
 
 				});
 
-			var valor = $("#valor_equipo").val();
-			$('#equipo > option[value= '+valor+']').attr('selected','selected');
+			//var valor = $("#valor_equipo").val();
+			//$('#equipo > option[value= '+valor+']').attr('selected','selected');
 
 			});
 

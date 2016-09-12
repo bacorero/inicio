@@ -51,10 +51,11 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 
     <div class="container" role="main">
   
-      <?php echo $this->Session->flash(); ?>
       <?php echo $this->Session->flash('auth'); ?>
 
       <?php echo $this->fetch('content'); ?>
+      
+      <?php echo $this->Session->flash(); ?>
       
       <br>
       <div id="msg"></div>

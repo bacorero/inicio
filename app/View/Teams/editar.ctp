@@ -13,7 +13,7 @@
 				<div class ="form-group">
 
 					<label for="nombre">Nombre del club</label>
-					<input type="text" class="form-control" id="nombre" value =" <?php echo $team['Team']['nombre']; ?>" name="data[1]">
+					<input type="text" class="form-control" id="nombre" value ="<?php echo $team['Team']['nombre']; ?>" name="data[1]">
 
 					<label for="contacto">Persona de contacto</label>
 					<input type="text" class="form-control" id="contacto" value = "<?php echo $team['Team']['contacto']; ?>" name="data[2]" >
@@ -22,16 +22,16 @@
 					<input type="text" class="form-control" id="direccion" value = "<?php echo $team['Team']['direccion']; ?>" name="data[3]">
 
 					<label for="poblacion">Poblacion</label>
-					<input type="text" class="form-control" id="poblacion" value =" <?php echo $team['Team']['poblacion']; ?>" name="data[4]" >
+					<input type="text" class="form-control" id="poblacion" value ="<?php echo $team['Team']['poblacion']; ?>" name="data[4]" >
 
 					<label for="telefono">Telefono contacto</label>
-					<input type="text" class="form-control" id="telefono" value = " <?php echo $team['Team']['telefono']; ?>" name="data[5]" >
+					<input type="text" class="form-control" id="telefono" value = "<?php echo $team['Team']['telefono']; ?>" name="data[5]" >
 
 					<label for="created">Fecha de creacion</label>
-					<input type="text" readonly="readonly" class="form-control" id="created" value = " <?php echo $team['Team']['created']; ?>" >
+					<input type="text" readonly="readonly" class="form-control" id="created" value = "<?php echo $team['Team']['created']; ?>" >
 
 					<label for="telefono">Fecha última modificación</label>
-					<input type="text" readonly="readonly" class="form-control" id="modified" value = " <?php echo $team['Team']['modified']; ?>">
+					<input type="text" readonly="readonly" class="form-control" id="modified" value = "<?php echo $team['Team']['modified']; ?>">
 
 					<input type="text" id="valor_categoria" value="<?php echo $team['Team']['categoria_id']; ?>" style="visibility:hidden">
 				</div>			
@@ -44,8 +44,8 @@
 			<?php echo $this->Form->input('id_foto.file.remove',array('type' =>'hidden')); ?>
 
 <!-- campo para modificar la foto -->
-			<input type="file" name="data[7]">
-			<input type="hidden" name="data[8]">
+			<input type="file" name="data[7]" value ="<?php echo "/inicio/app/webroot/files/team/id_foto/".$team['Team']['dir']."/"."big_".$team['Team']['id_foto']; ?>">
+			<input type="hidden" name="data[8]" value ="<?php echo $team['Team']['dir']; ?>">
 			<?php //echo $this->Form->input('id_foto', array('type' => 'file', 'label' => 'Cambiar Foto','class' => 'btn btn-sm btn-primary'));
       		//echo $this->Form->input('dir',array('type' =>'hidden')); 
 			?>

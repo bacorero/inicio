@@ -70,6 +70,7 @@ class PlayersController extends AppController {
 			$data_array['Player']['dir'] =$datos[18];
 
 			$this->Player->save($data_array);
+			$this->flash('Jugador eliminado',$element = 'default', $params = array('class'=> 'sucess'));
 			return $this->redirect(array('action' =>'index'));
 		}
 
@@ -213,7 +214,7 @@ public function ver($id=null)
 	//Acción de eliminar un jugador
 public function eliminar($id)
 {
-	if($this->request->is('get'))
+	if($this->request->is('post'))
 	{
 		throw new MethodNotAllowedException('Método de eliminación incorrecto');
 	}
